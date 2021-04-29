@@ -1,21 +1,85 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Signup from "./components/signup";
+import Login from "./components/login";
+import "react-native-gesture-handler";
+import userList from "./components/userList";
+import { AntDesign } from "@expo/vector-icons";
+import { View } from "react-native";
 
-export default function App() {
+function Ta() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color }) => {
+          let iconName;
+
+          if (route.name === "Home") {
+            iconName = "home";
+          } else if (route.name === "Message") {
+            iconName = "message1";
+          } else if (route.name === "Status") {
+            iconName = "staro";
+          }
+
+          // You can return any component that you like here!
+          return <AntDesign name={iconName} size={35} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: "#009387",
+        inactiveTintColor: "black",
+
+        // style: {
+        // backgroundColor: "#009387",
+
+        // },
+        // labelStyle: {
+        // fontSize:10,
+        //  margin: 0,
+        //   padding: 0,
+
+        // },
+      }}
+    >
+      <Tab.Screen name="Home" component={userList} />
+      <Tab.Screen name="Message" component={userList} />
+      <Tab.Screen name="Status" component={userList} />
+    </Tab.Navigator>
+  );
+}
+function Auth() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Ta}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function App() {
+  return (
+    <NavigationContainer>
+      <Auth />
+    </NavigationContainer>
+  );
+}
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+export default App;
