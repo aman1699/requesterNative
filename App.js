@@ -8,11 +8,12 @@ import "react-native-gesture-handler";
 import userList from "./components/userList";
 import { AntDesign } from "@expo/vector-icons";
 import { View } from "react-native";
+import Message from './components/message';
 
 function Ta() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+        screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
           let iconName;
 
@@ -45,7 +46,7 @@ function Ta() {
       }}
     >
       <Tab.Screen name="Home" component={userList} />
-      <Tab.Screen name="Message" component={userList} />
+      <Tab.Screen name="Message" component={Message} />
       <Tab.Screen name="Status" component={userList} />
     </Tab.Navigator>
   );

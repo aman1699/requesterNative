@@ -13,7 +13,7 @@ import {
   Animated,
   Alert,
 } from "react-native";
-import { AntDesign, MaterialIcons,Feather } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons, Feather } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import { color } from "react-native-reanimated";
 import { Appbar, Card, Title, Paragraph } from "react-native-paper";
@@ -55,35 +55,43 @@ const use = [
 
 function userList() {
   const [search, setSearch] = useState("");
-  
 
   const filtereduser = use.filter((user) => {
-    
     return user.name.toLowerCase().includes(search);
-      
   });
 
   const handleChange = (val) => {
     setSearch(val);
   };
-  
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#009387" barStyle="dark-content" />
+      <StatusBar backgroundColor="#009387" barStyle="light-content" />
       <Appbar.Header style={{ backgroundColor: "#009387" }}>
-       
         <TouchableOpacity>
-          <View style={{ flexDirection: 'row', backgroundColor: '#fff',marginLeft:300,width:110,height:30,paddingLeft:10 }}>
-          <MaterialIcons name="logout" size={22} color="black" style={{marginTop:4}} />
-          <Text style={{fontSize:18,marginTop:3,marginLeft:2}}>Logout</Text>
-             </View>
-          </TouchableOpacity>
-      
-        
-         
-       </Appbar.Header>
-       <View
+          <View
+            style={{
+              flexDirection: "row",
+              backgroundColor: "#fff",
+              marginLeft: 300,
+              width: 110,
+              height: 30,
+              paddingLeft: 10,
+            }}
+          >
+            <MaterialIcons
+              name="logout"
+              size={22}
+              color="black"
+              style={{ marginTop: 4 }}
+            />
+            <Text style={{ fontSize: 18, marginTop: 3, marginLeft: 2 }}>
+              Logout
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </Appbar.Header>
+      <View
         style={{
           flexDirection: "row",
           backgroundColor: "#E2E5DE",
@@ -127,7 +135,6 @@ function userList() {
           ))}
         </View>
       </ScrollView>
-       
     </View>
   );
 }
