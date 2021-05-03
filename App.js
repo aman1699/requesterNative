@@ -9,6 +9,7 @@ import userList from "./components/userList";
 import { AntDesign } from "@expo/vector-icons";
 import { View } from "react-native";
 import Message from './components/message';
+import Status from './components/status';
 
 function Ta() {
   return (
@@ -47,7 +48,7 @@ function Ta() {
     >
       <Tab.Screen name="Home" component={userList} />
       <Tab.Screen name="Message" component={Message} />
-      <Tab.Screen name="Status" component={userList} />
+      <Tab.Screen name="Status" component={Status} />
     </Tab.Navigator>
   );
 }

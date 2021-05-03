@@ -51,7 +51,7 @@ function Login({ navigation }) {
 
   const signin = async() => {
     try {
-      const res = await Axios.post("http://192.168.1.101:2000/api/signin", {
+      const res = await Axios.post("http://192.168.1.102:2000/api/signin", {
         email: data.email,
         password: data.password
       })
