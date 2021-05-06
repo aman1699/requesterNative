@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,12 +13,19 @@ import {
   Animated,
   Alert,
 } from "react-native";
-import { AntDesign, MaterialIcons, Feather } from "@expo/vector-icons";
+import {
+  AntDesign,
+  MaterialIcons,
+  Feather,
+  Ionicons,
+} from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import { color } from "react-native-reanimated";
 import { Appbar, Card, Title, Paragraph } from "react-native-paper";
 import { Entypo } from "@expo/vector-icons";
-const use = [
+import { apisAreAvailable } from "expo";
+import axios from "axios";
+/*const use = [
   {
     name: "Aman",
     address: "Bangalore,India",
@@ -51,17 +58,44 @@ const use = [
     name: "Fara",
     address: "Bangalore,India",
   },
-];
-
-function userList() {
+];*/
+let newstate = [];
+function Home(props) {
   const [search, setSearch] = useState("");
+  const [use, setuser] = useState([]);
+
+  useEffect(() => {
+    users();
+  }, []);
+
+  const users = async () => {
+    const res = await axios.get("http://192.168.1.101:2000/api/users");
+    console.log(res.data);
+    let newstate = [];
+    for (var i = 0; i < res.data.length; i++) {
+      newstate.push({
+        username: res.data[i].username,
+        address: res.data[i].address,
+      });
+    }
+    setuser(newstate);
+  };
 
   const filtereduser = use.filter((user) => {
-    return user.name.toLowerCase().includes(search);
+    return user.username.toLowerCase().includes(search);
   });
 
   const handleChange = (val) => {
     setSearch(val);
+  };
+  const aa = (abd) => {
+    console.log(props.route.params.id);
+    props.navigation.navigate("Message", {
+      p1: abd.username,
+      p2: abd.address,
+      p3: props.route.params.id,
+    });
+    //  console.log(abd)
   };
 
   return (
@@ -116,7 +150,8 @@ function userList() {
         <View style={{ margin: 10 }}>
           {filtereduser.map((abd) => (
             <Card
-              key={abd.name}
+              key={abd.username}
+              onPress={() => aa(abd)}
               style={{ elevation: 6, paddingBottom: 30, marginTop: 10 }}
             >
               <View style={{ flexDirection: "row" }}>
@@ -127,7 +162,7 @@ function userList() {
                   style={{ marginTop: 10 }}
                 />
                 <Card.Content>
-                  <Title>{abd.name}</Title>
+                  <Title>{abd.username}</Title>
                   <Paragraph>{abd.address}</Paragraph>
                 </Card.Content>
               </View>
@@ -150,4 +185,4 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === "ios" ? 0 : -5,
   },
 });
-export default userList;
+export default Home;

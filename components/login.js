@@ -13,14 +13,15 @@ import {
 import { AntDesign, Feather } from "@expo/vector-icons";
 import Axios  from 'axios';
 
-function Login({ navigation }) {
+function Login(props) {
   const [data, setData] = useState({
     email: "",
     password: "",
     checkInput: false,
     secureTextEntry: true,
   });
-  const textInputChange = (val) => {
+  
+const textInputChange = (val) => {
     if (val.length !== 0) {
       setData({
         ...data,
@@ -51,13 +52,18 @@ function Login({ navigation }) {
 
   const signin = async() => {
     try {
-      const res = await Axios.post("http://192.168.1.102:2000/api/signin", {
+      const res = await Axios.post("http://192.168.1.101:2000/api/signin", {
         email: data.email,
         password: data.password
       })
-      console.log(res)
+      console.log(res.data[0].username)
+      var y = res.data[0].username;
+      console.log(y)
       if (res.status === 200) {
-        navigation.navigate('Home')
+        props.navigation.navigate('Home', {
+          screen: 'Home',
+          params: { id: y },
+        }); 
       } 
     }
     catch (err) {

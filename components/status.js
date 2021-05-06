@@ -13,7 +13,8 @@ import {
   AntDesign,
   MaterialIcons,
   Feather,
-  Fontisto,
+    Fontisto,
+  Entypo,FontAwesome5
 } from "@expo/vector-icons";
 
 const use = [
@@ -95,14 +96,16 @@ function Status() {
                 <View style={{ flexDirection: "column" }}>
                   <Card.Content style={{ width: 100 }}>
                     <Title style={{ marginTop: 10 }}>{abd.name}</Title>
-                  </Card.Content>
+                          </Card.Content>
+                          <FontAwesome5 name="file-video" size={30} color="#009387" style={{ marginTop: 20, marginLeft: 25 }} />
+                          <Text style={{marginLeft:15,marginTop:5}}>Video</Text>
                   <TouchableOpacity onPress={() => so()}>
                     <Fontisto
                       name="share-a"
                       size={20}
                       color="#009387"
                       style={{
-                        marginTop: 90,
+                        marginTop: 10,
                         borderWidth: 0.1,
                         paddingLeft: 25,
                         paddingRight: 40,
@@ -110,7 +113,7 @@ function Status() {
                       }}
                     />
                   </TouchableOpacity>
-                  <Text style={{ marginTop: 10, fontSize: 15, marginLeft: 15 }}>
+                  <Text style={{ marginTop:10, fontSize: 15, marginLeft: 15 }}>
                     Share
                   </Text>
                 </View>

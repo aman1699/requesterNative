@@ -5,11 +5,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Signup from "./components/signup";
 import Login from "./components/login";
 import "react-native-gesture-handler";
-import userList from "./components/userList";
+
 import { AntDesign } from "@expo/vector-icons";
 import { View } from "react-native";
 import Message from './components/message';
 import Status from './components/status';
+import Home from './components/userList';
 
 function Ta() {
   return (
@@ -46,7 +47,7 @@ function Ta() {
         // },
       }}
     >
-      <Tab.Screen name="Home" component={userList} />
+      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Message" component={Message} />
       <Tab.Screen name="Status" component={Status} />
     </Tab.Navigator>

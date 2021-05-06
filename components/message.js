@@ -2,14 +2,18 @@ import React from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-function Message() {
+function Message(props) {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", margin: 70 }}>
         <AntDesign name="user" size={60} color="black" />
         <View style={{ flexDirection: "column" }}>
-          <Text style={{ fontSize: 30, marginLeft: 10 }}>Aman</Text>
-          <Text style={{ fontSize: 20, marginLeft: 10 }}>Bangalore,India</Text>
+          <Text style={{ fontSize: 30, marginLeft: 10 }}>
+            {props.route.params.p1}
+          </Text>
+          <Text style={{ fontSize: 20, marginLeft: 10 }}>
+            {props.route.params.p2}
+          </Text>
         </View>
       </View>
       <View
