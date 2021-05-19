@@ -25,6 +25,7 @@ import { Appbar, Card, Title, Paragraph } from "react-native-paper";
 import { Entypo } from "@expo/vector-icons";
 import { apisAreAvailable } from "expo";
 import axios from "axios";
+
 /*const use = [
   {
     name: "Aman",
@@ -66,10 +67,11 @@ function Home(props) {
 
   useEffect(() => {
     users();
+    
   }, []);
 
   const users = async () => {
-    const res = await axios.get("http://192.168.1.101:2000/api/users");
+    const res = await axios.get("http://192.168.1.100:2000/api/users");
     console.log(res.data);
     let newstate = [];
     for (var i = 0; i < res.data.length; i++) {

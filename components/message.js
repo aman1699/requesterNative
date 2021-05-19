@@ -1,8 +1,29 @@
-import React from "react";
+import React,{useState} from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import axios from "axios";
 function Message(props) {
+  const [message, setMessage] = useState("");
+  const messageChange = (val) => {
+    setMessage(val)
+  }
+  const send = async () => {
+    try {
+      const res = await axios.post("http://192.168.1.100:2000/api/message", {
+        requestedBy: props.route.params.p3,
+        requestedTo: props.route.params.p1,
+        Message: message
+      })
+      if (res.status === 200) {
+        props.navigation.navigate('Status', {
+          p4:props.route.params.p3
+        })
+      }
+    } catch (err) {
+      console.log(err);
+    }
+ }
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", margin: 70 }}>
@@ -44,6 +65,7 @@ function Message(props) {
           style={styles.textInput}
           multiline={true}
           autoCapitalize="none"
+          onChangeText={(val) => messageChange(val)}
         />
       </View>
       <View
@@ -53,7 +75,7 @@ function Message(props) {
           margin: 40,
         }}
       >
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>send()}>
           <Text
             style={{
               color: "#fff",

@@ -52,7 +52,7 @@ const textInputChange = (val) => {
 
   const signin = async() => {
     try {
-      const res = await Axios.post("http://192.168.1.101:2000/api/signin", {
+      const res = await Axios.post("http://192.168.1.100:2000/api/signin", {
         email: data.email,
         password: data.password
       })
@@ -142,7 +142,7 @@ const textInputChange = (val) => {
             borderColor: "#009387",
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+          <TouchableOpacity onPress={() => props.navigation.navigate("Signup")}>
             <Text
               style={{
                 color: "#009387",
